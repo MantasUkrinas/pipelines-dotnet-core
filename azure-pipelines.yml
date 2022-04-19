@@ -12,7 +12,7 @@ parameters:
     - Service2
   default: 'Custom'
 - name: custom_choices
-  type: string
+  type: object
   default: 'Service1,Service2'
     
 trigger: 
