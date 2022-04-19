@@ -7,10 +7,10 @@ parameters:
 - name: Select_Services
   type: string
   values:
-    - Custom
+    - Build_All_Services
     - Service1
     - Service2
-  default: 'Custom'
+  default: 'Build_All_Services'
 - name: custom_choices
   type: object
   default: 
@@ -33,23 +33,23 @@ stages:
   - job: Welcome
     steps:
     - task: CmdLine@2
-      displayName: 'Frist Task'
+      displayName: 'Selcet Service to build example'
       inputs:
-        script: 'echo First task'
+        script: 'echo Selcet Service to build example'
   - ${{ if contains(parameters.Select_Services, 'Service1') }}:
     - job: Service1
       steps:
       - task: CmdLine@2
-        displayName: 'Frist Task'
+        displayName: 'Service1 selected'
         inputs:
-          script: 'echo First task'
+          script: 'echo Service1 selected'
   - ${{ if contains(parameters.Select_Services, 'Service2') }}:
     - job: Service2
       steps:
       - task: CmdLine@2
-        displayName: 'Second task'
+        displayName: 'Service2 selected'
         inputs:
-          script: 'echo Second task'
+          script: 'echo Service2 selected'
 - stage: DeployToTEST
   displayName: 'DEPLOY TO TEST STAGE'
   jobs:
