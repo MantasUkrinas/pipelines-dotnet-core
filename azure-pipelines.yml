@@ -30,14 +30,14 @@ stages:
 - stage: Build
   displayName: 'BUILD STAGE'
   jobs:
-  - ${{ if contains(convertToJson(parameters.configs), 'Service1') }}:
+  - ${{ if contains(parameters.configs, 'Service1') }}:
   - job: Service1
     steps:
     - task: CmdLine@2
       displayName: 'Frist Task'
       inputs:
         script: 'echo First task'
-  - ${{ if contains(convertToJson(parameters.configs), 'Service2') }}:
+  - ${{ if contains(parameters.configs, 'Service2') }}:
     - job: Service2
       steps:
       - task: CmdLine@2
