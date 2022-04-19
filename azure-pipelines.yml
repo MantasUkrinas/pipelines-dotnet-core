@@ -28,7 +28,7 @@ stages:
 - stage: Build
   displayName: 'BUILD STAGE'
   jobs:
-  - ${{ if contains(parameters.configs, 'Service1') }}:
+  - ${{ if contains(parameters.configs.convertToJson , 'Service1') }}:
     - job: Service1
       steps:
       - task: CmdLine@2
