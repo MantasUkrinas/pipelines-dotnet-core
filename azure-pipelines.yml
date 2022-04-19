@@ -37,7 +37,7 @@ stages:
         displayName: 'Frist Task'
         inputs:
           script: 'echo First task'
-  - ${{ if contains(parameters.configs, 'Service2') }}:
+  - ${{ if contains(convertToJson(parameters.configs), 'Service2') }}:
     - job: Service2
       steps:
       - task: CmdLine@2
