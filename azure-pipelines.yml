@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 parameters:
-- name: Select Services
+- name: Select_Services
   type: string
   values:
     - Custom
@@ -30,14 +30,14 @@ stages:
 - stage: Build
   displayName: 'BUILD STAGE'
   jobs:
-  - ${{ if contains(parameters.configs, 'Service1') }}:
+  - ${{ if contains(parameters.Select_Services, 'Service1') }}:
   - job: Service1
     steps:
     - task: CmdLine@2
       displayName: 'Frist Task'
       inputs:
         script: 'echo First task'
-  - ${{ if contains(parameters.configs, 'Service2') }}:
+  - ${{ if contains(parameters.Select_Services, 'Service2') }}:
     - job: Service2
       steps:
       - task: CmdLine@2
