@@ -14,8 +14,8 @@ parameters:
 - name: custom_choices
   type: object
   default:
-    - Service1
-    - Service2
+    Service1
+    Service2
     
 trigger: 
   - master
