@@ -6,7 +6,7 @@
 parameters:
 - name: configs
   type: string
-  default: 'x86,x64'
+  default: 'Service1'
 
 trigger:
 - none
@@ -21,20 +21,20 @@ stages:
 - stage: Build
   displayName: 'BUILD STAGE'
   jobs:
-  - ${{ if contains(parameters.configs, 'x86') }}:
-  - job: Service1
-    steps:
-    - task: CmdLine@2
-      displayName: 'Frist Task'
-      inputs:
-        script: 'echo First task'
-   - ${{ if contains(parameters.configs, 'x64') }}:
-   - job: Service2
-     steps:
-     - task: CmdLine@2
-       displayName: 'Second task'
-       inputs:
-         script: 'echo Second task'
+  - ${{ if contains(parameters.configs, 'Service1') }}:
+    - job: Service1
+      steps:
+      - task: CmdLine@2
+        displayName: 'Frist Task'
+        inputs:
+          script: 'echo First task'
+   - ${{ if contains(parameters.configs, 'Service2') }}:
+     - job: Service2
+       steps:
+       - task: CmdLine@2
+         displayName: 'Second task'
+         inputs:
+           script: 'echo Second task'
 - stage: DeployToTEST
   displayName: 'DEPLOY TO TEST STAGE'
   jobs:
