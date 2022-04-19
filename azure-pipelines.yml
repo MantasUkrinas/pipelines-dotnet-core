@@ -30,6 +30,12 @@ stages:
 - stage: Build
   displayName: 'BUILD STAGE'
   jobs:
+  - job: Welcome
+    steps:
+    - task: CmdLine@2
+      displayName: 'Frist Task'
+      inputs:
+        script: 'echo First task'
   - ${{ if contains(parameters.Select_Services, 'Service1') }}:
     - job: Service1
       steps:
