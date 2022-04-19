@@ -12,8 +12,17 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
-steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
-steps:
-- displayName: 'stage 2'
+stages:
+- stage: Build
+  displayName: 'BUILD STAGE'
+  jobs:
+  - job: Build
+    steps:
+    - script: dotnet build --configuration $(buildConfiguration)
+    displayName: 'DOTNET BUILD $(buildConfiguration)'
+- stage: DeployToTEST
+  displayName: 'DEPLOY TO TEST STAGE'
+  jobs:
+  - job: DeployToTESTJob
+    steps:
+    displayName: 'stage 2'
