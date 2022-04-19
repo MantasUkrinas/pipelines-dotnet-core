@@ -1,7 +1,6 @@
-# ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+# Example of pipeline which uses runtime parameters
+# You are given a list of options to select, or you can use custom mode for choosing multiple options.
+# By default all options are selected
 
 parameters:
 - name: Select_Services
@@ -56,4 +55,3 @@ stages:
   - job: DeployToTESTJob
     steps:
     - script: echo "hello from stage2"
-    displayName: 'stage 2'
