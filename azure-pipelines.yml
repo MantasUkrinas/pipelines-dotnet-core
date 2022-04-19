@@ -18,7 +18,9 @@ stages:
   jobs:
   - job: Build
     steps:
-    - script: dotnet build --configuration $(buildConfiguration)
+    - task: CmdLine@2
+      inputs:
+        script: 'echo Write your commands here.' 
     displayName: 'DOTNET BUILD $(buildConfiguration)'
 - stage: DeployToTEST
   displayName: 'DEPLOY TO TEST STAGE'
