@@ -7,10 +7,16 @@ parameters:
 - name: Select Services
   type: string
   values:
-       - Service1
-       - Service2
-  default: 'Service1,Service2'
-
+    - Custom
+    - Service1
+    - Service2
+  default: 'Custom'
+- name: custom_choices
+  type: object
+  default:
+    - Service1
+    - Service2
+    
 trigger: 
   - master
 
