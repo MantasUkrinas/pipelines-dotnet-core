@@ -9,7 +9,7 @@ parameters:
   values:
        - Service1
        - Service2
-  default: 'Service1'
+  default: 'Service1,Service2'
 
 trigger: none
 
