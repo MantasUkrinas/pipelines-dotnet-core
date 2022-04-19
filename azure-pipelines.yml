@@ -3,8 +3,13 @@
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
+parameters:
+- name: configs
+  type: string
+  default: 'x86'
+
 trigger:
-- master
+- none
 
 pool:
   vmImage: ubuntu-latest
@@ -16,16 +21,20 @@ stages:
 - stage: Build
   displayName: 'BUILD STAGE'
   jobs:
-  - job: Build
+  - ${{ if contains(parameters.configs, 'x86') }}:
+  - job: Service1
     steps:
     - task: CmdLine@2
       displayName: 'Frist Task'
       inputs:
         script: 'echo First task'
-    - task: CmdLine@2
-      displayName: 'Second task'
-      inputs:
-        script: 'echo Second task'
+   - ${{ if contains(parameters.configs, 'x64') }}:
+   - job: Service2
+     steps:
+     - task: CmdLine@2
+       displayName: 'Second task'
+       inputs:
+         script: 'echo Second task'
 - stage: DeployToTEST
   displayName: 'DEPLOY TO TEST STAGE'
   jobs:
