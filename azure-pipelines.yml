@@ -4,8 +4,8 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 parameters:
-- name: configs
-  type: Build Services
+- name: Select Services
+  type: string
   values:
        - Service1
        - Service2
