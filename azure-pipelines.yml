@@ -30,13 +30,13 @@ stages:
         displayName: 'Frist Task'
         inputs:
           script: 'echo First task'
-   - ${{ if contains(parameters.configs, 'Service2') }}:
-     - job: Service2
-       steps:
-       - task: CmdLine@2
-         displayName: 'Second task'
-         inputs:
-           script: 'echo Second task'
+  - ${{ if contains(parameters.configs, 'Service2') }}:
+    - job: Service2
+      steps:
+      - task: CmdLine@2
+        displayName: 'Second task'
+        inputs:
+          script: 'echo Second task'
 - stage: DeployToTEST
   displayName: 'DEPLOY TO TEST STAGE'
   jobs:
