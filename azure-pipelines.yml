@@ -6,6 +6,9 @@
 parameters:
 - name: configs
   type: string
+  values:
+       - Service1
+       - Service2
   default: 'Service1'
 
 trigger: none
