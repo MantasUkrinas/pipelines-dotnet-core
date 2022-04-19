@@ -19,9 +19,13 @@ stages:
   - job: Build
     steps:
     - task: CmdLine@2
+      displayName: 'Frist Task'
       inputs:
-        script: 'echo Write your commands here.' 
-    displayName: 'DOTNET BUILD $(buildConfiguration)'
+        script: 'echo First task'
+    - task: CmdLine@2
+      displayName: 'Second task'
+      inputs:
+        script: 'echo Second task'
 - stage: DeployToTEST
   displayName: 'DEPLOY TO TEST STAGE'
   jobs:
