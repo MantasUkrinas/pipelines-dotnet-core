@@ -31,12 +31,12 @@ stages:
   displayName: 'BUILD STAGE'
   jobs:
   - ${{ if contains(parameters.Select_Services, 'Service1') }}:
-  - job: Service1
-    steps:
-    - task: CmdLine@2
-      displayName: 'Frist Task'
-      inputs:
-        script: 'echo First task'
+    - job: Service1
+      steps:
+      - task: CmdLine@2
+        displayName: 'Frist Task'
+        inputs:
+          script: 'echo First task'
   - ${{ if contains(parameters.Select_Services, 'Service2') }}:
     - job: Service2
       steps:
