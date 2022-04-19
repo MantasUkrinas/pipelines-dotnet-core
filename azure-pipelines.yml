@@ -5,7 +5,7 @@
 
 parameters:
 - name: configs
-  type: string
+  type: Build Services
   values:
        - Service1
        - Service2
