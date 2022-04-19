@@ -11,7 +11,8 @@ parameters:
        - Service2
   default: 'Service1,Service2'
 
-trigger: none
+trigger: 
+  - master
 
 pool:
   vmImage: ubuntu-latest
