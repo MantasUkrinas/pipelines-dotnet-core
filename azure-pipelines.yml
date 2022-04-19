@@ -30,9 +30,6 @@ stages:
 - stage: Build
   displayName: 'BUILD STAGE'
   jobs:
-  - job: print
-    steps:
-    - script: 'echo ${{ convertToJson(parameters.custom_choices) }}'
   - ${{ if contains(convertToJson(parameters.configs), 'Service1') }}:
   - job: Service1
     steps:
