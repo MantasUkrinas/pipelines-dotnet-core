@@ -25,4 +25,5 @@ stages:
   jobs:
   - job: DeployToTESTJob
     steps:
+    - script: echo "hello from stage2"
     displayName: 'stage 2'
