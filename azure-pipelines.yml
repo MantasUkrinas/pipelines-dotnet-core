@@ -30,15 +30,16 @@ stages:
 - stage: Build
   displayName: 'BUILD STAGE'
   jobs:
-    - script: |
-      'json=$(echo '${{ convertToJson(parameters.custom_choices) }}')'
+  - job: print
+    steps:
+    - script: 'echo ${{ convertToJson(parameters.custom_choices) }}'
   - ${{ if contains(convertToJson(parameters.configs), 'Service1') }}:
-    - job: Service1
-      steps:
-      - task: CmdLine@2
-        displayName: 'Frist Task'
-        inputs:
-          script: 'echo First task'
+  - job: Service1
+    steps:
+    - task: CmdLine@2
+      displayName: 'Frist Task'
+      inputs:
+        script: 'echo First task'
   - ${{ if contains(convertToJson(parameters.configs), 'Service2') }}:
     - job: Service2
       steps:
