@@ -44,7 +44,8 @@ stages:
         script: 'echo Service2 selected'
 - stage: DeployToTEST
   variables:
-    Environment: 'Test'
+  - name: Environment
+    value: 'single var'
   - group: my-variable-group2
   displayName: 'DEPLOY'
   jobs:
