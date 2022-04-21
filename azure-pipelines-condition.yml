@@ -10,9 +10,6 @@ parameters:
 - name: Service2
   type: boolean
   default: true
-  
-variables:
-- group: my-variable-group
     
 trigger: 
   - master
@@ -22,6 +19,8 @@ pool:
 
 stages:
 - stage: Build
+  variables:
+  - group: my-variable-group
   displayName: 'BUILD STAGE'
   condition: and(succeeded(), eq('${{ parameters.Service1 }}', 'true'))
   jobs:
@@ -44,7 +43,9 @@ stages:
       inputs:
         script: 'echo Service2 selected'
 - stage: DeployToTEST
-  displayName: 'DEPLOY TO TEST STAGE'
+  variables:
+- group: my-variable-group2
+  displayName: 'Variable from group2 $(name)'
   jobs:
   - job: DeployToTESTJob
     steps:
