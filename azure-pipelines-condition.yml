@@ -50,4 +50,4 @@ stages:
   - job: DeployToTESTJob
     steps:
     - script: echo "hello from stage2"
-    displayName: 'Variable from group2 $(name)'
+      displayName: 'Variable from group2 $(name)'
