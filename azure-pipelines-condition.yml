@@ -31,7 +31,7 @@ stages:
   - job: Welcome
     steps:
     - task: CmdLine@2
-      displayName: 'Selcet Service to build example'
+      displayName: 'Variable from group $(name)'
       inputs:
         script: 'echo Selcet Service to build example'
   - job: Service1
