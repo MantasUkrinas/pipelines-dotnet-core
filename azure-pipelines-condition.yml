@@ -53,4 +53,4 @@ stages:
     - task: CmdLine@2
       displayName: 'Variable from group2 $(name)'
       inputs:
-        script: 'echo Selcet Service to build example $(variables.Environment)'
+        script: 'echo Selcet Service to build example $(Environment)'
