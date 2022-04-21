@@ -51,6 +51,6 @@ stages:
   - job: DeployToTESTJob
     steps:
     - task: CmdLine@2
-      displayName: 'Variable from group2 $(name)'
+      displayName: 'Variable from group2 $(name) $(Environment)'
       inputs:
-        script: 'echo Selcet Service to build example $(Environment)'
+        script: 'echo Selcet Service to build example'
