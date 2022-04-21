@@ -23,6 +23,7 @@ variables:
 stages:
 - stage: Build
   displayName: 'BUILD STAGE'
+  condition: eq(parameters.Service1, 'true')
   jobs:
   - job: Welcome
     steps:
@@ -30,14 +31,12 @@ stages:
       displayName: 'Selcet Service to build example'
       inputs:
         script: 'echo Selcet Service to build example'
-  condition: eq(parameters.Service1, 'true')
   - job: Service1
     steps:
     - task: CmdLine@2
       displayName: 'Service1 selected'
       inputs:
         script: 'echo Service1 selected'
-  condition: eq(parameters.Service2, 'true')
   - job: Service2
     steps:
     - task: CmdLine@2
