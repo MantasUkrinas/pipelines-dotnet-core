@@ -20,9 +20,6 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-variables:
-  buildConfiguration: 'Release'
-
 stages:
 - stage: Build
   displayName: 'BUILD STAGE'
