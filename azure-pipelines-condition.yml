@@ -49,5 +49,7 @@ stages:
   jobs:
   - job: DeployToTESTJob
     steps:
-    - script: echo "hello from stage2"
+    - task: CmdLine@2
       displayName: 'Variable from group2 $(name)'
+      inputs:
+        script: 'echo Selcet Service to build example'
