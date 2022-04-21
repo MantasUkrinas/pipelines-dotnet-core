@@ -45,8 +45,9 @@ stages:
 - stage: DeployToTEST
   variables:
   - group: my-variable-group2
-  displayName: 'Variable from group2 $(name)'
+  displayName: 'DEPLOY'
   jobs:
   - job: DeployToTESTJob
     steps:
+    displayName: 'Variable from group2 $(name)'
     - script: echo "hello from stage2"
