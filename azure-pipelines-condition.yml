@@ -3,8 +3,16 @@
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-trigger:
-- master
+parameters:
+- name: Service1
+  type: boolean
+  default: true
+- name: Service2
+  type: boolean
+  default: true
+    
+trigger: 
+  - master
 
 pool:
   vmImage: ubuntu-latest
@@ -12,6 +20,33 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
-steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+stages:
+- stage: Build
+  displayName: 'BUILD STAGE'
+  jobs:
+  - job: Welcome
+    steps:
+    - task: CmdLine@2
+      displayName: 'Selcet Service to build example'
+      inputs:
+        script: 'echo Selcet Service to build example'
+    condition: and(succeeded(), eq('${{ parameters.Service1 }}', 'true'))
+    - job: Service1
+      steps:
+      - task: CmdLine@2
+        displayName: 'Service1 selected'
+        inputs:
+          script: 'echo Service1 selected'
+    condition: and(succeeded(), eq('${{ parameters.Service2 }}', 'true'))
+    - job: Service2
+      steps:
+      - task: CmdLine@2
+        displayName: 'Service2 selected'
+        inputs:
+          script: 'echo Service2 selected'
+- stage: DeployToTEST
+  displayName: 'DEPLOY TO TEST STAGE'
+  jobs:
+  - job: DeployToTESTJob
+    steps:
+    - script: echo "hello from stage2"
