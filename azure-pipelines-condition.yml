@@ -23,7 +23,7 @@ variables:
 stages:
 - stage: Build
   displayName: 'BUILD STAGE'
-  condition: eq(parameters.Service1, 'true')
+  condition: and(succeeded(), eq('${{ parameters.CRforPROD }}', 'true'))
   jobs:
   - job: Welcome
     steps:
