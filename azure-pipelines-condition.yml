@@ -44,6 +44,7 @@ stages:
         script: 'echo Service2 selected'
 - stage: DeployToTEST
   variables:
+    Environment: 'Test'
   - group: my-variable-group2
   displayName: 'DEPLOY'
   jobs:
@@ -52,4 +53,4 @@ stages:
     - task: CmdLine@2
       displayName: 'Variable from group2 $(name)'
       inputs:
-        script: 'echo Selcet Service to build example'
+        script: 'echo Selcet Service to build example $(variables.Environment)'
