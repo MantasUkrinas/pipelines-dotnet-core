@@ -56,4 +56,4 @@ stages:
     steps:
     - powershell: |
      Write-Host 'Environment: test'
-    displayName: 'Set environment: ${{ parameters.Environment }}'
+    displayName: 'Pwershell script completed'
