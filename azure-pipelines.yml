@@ -54,4 +54,6 @@ stages:
   jobs:
   - job: DeployToTESTJob
     steps:
-    - script: echo "hello from stage2"
+    - powershell: |
+     Write-Host 'Environment: test'
+    displayName: 'Set environment: ${{ parameters.Environment }}'
