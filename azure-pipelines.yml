@@ -56,4 +56,5 @@ stages:
     steps:
     - powershell: |
         Write-Host 'Environment: test'
-    displayName: 'Pwershell script completed'
+        Write-Host 'Second line'
+      displayName: 'Pwershell script completed'
