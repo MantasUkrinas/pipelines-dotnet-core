@@ -55,5 +55,5 @@ stages:
   - job: DeployToTESTJob
     steps:
     - powershell: |
-     Write-Host 'Environment: test'
-    displayName: 'Pwershell script completed'
+        Write-Host 'Environment: test'
+      displayName: 'Pwershell script completed'
