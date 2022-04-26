@@ -22,17 +22,19 @@ stages:
   variables:
   - group: my-variable-group
   displayName: 'BUILD STAGE'
-  condition: and(succeeded(), eq('${{ parameters.Service1 }}', 'true'))
+  #condition: and(succeeded(), eq('${{ parameters.Service1 }}', 'true'))
   jobs:
   - job: Welcome
     steps:
     - task: CmdLine@2
+      condition: and(succeeded(), eq('${{ parameters.Service1 }}', 'true'))
       displayName: 'Variable from group $(name)'
       inputs:
         script: 'echo Selcet Service to build example'
   - job: Service1
     steps:
     - task: CmdLine@2
+      condition: and(succeeded(), eq('${{ parameters.Service2 }}', 'true'))
       displayName: 'Service1 selected'
       inputs:
         script: 'echo Service1 selected'
