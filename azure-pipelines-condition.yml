@@ -31,16 +31,16 @@ stages:
       inputs:
         script: 'echo Selcet Service to build example'
   - job: Service1
+    condition: and(succeeded(), eq('${{ parameters.Service1 }}', 'true'))
     steps:
     - task: CmdLine@2
-      condition: and(succeeded(), eq('${{ parameters.Service1 }}', 'true'))
       displayName: 'Service1 selected'
       inputs:
         script: 'echo Service1 selected'
   - job: Service2
+    condition: and(succeeded(), eq('${{ parameters.Service2 }}', 'true'))
     steps:
     - task: CmdLine@2
-      condition: and(succeeded(), eq('${{ parameters.Service2 }}', 'true'))
       displayName: 'Service2 selected'
       inputs:
         script: 'echo Service2 selected'
