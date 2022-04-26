@@ -43,7 +43,7 @@ stages:
     - task: CmdLine@2
       displayName: 'Service2 selected'
       inputs:
-        script: 'echoo Service2 selected'
+        script: 'echo Service2 selected'
 - stage: DeployToTEST
   variables:
   - name: Environment
