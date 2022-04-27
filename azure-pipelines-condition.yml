@@ -18,18 +18,21 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-- stage: Build
+- stage: Pre-Flight
   variables:
   - group: my-variable-group
-  displayName: 'BUILD STAGE'
+  displayName: 'Pre-Flight'
   #condition: and(succeeded(), eq('${{ parameters.Service1 }}', 'true'))
   jobs:
-  - job: Welcome
+  - job: Do Security Scan
     steps:
     - task: CmdLine@2
       displayName: 'Variable from group $(name)'
       inputs:
-        script: 'echo Selcet Service to build example'
+        script: 'echo Completed Security Scan'
+- stage: Build Service1
+  dependsOn: Pre-Flight
+  displayName: 'BUILD Service 1'
   - job: Service1
     condition: and(succeeded(), eq('${{ parameters.Service1 }}', 'true'))
     steps:
@@ -37,6 +40,9 @@ stages:
       displayName: 'Service1 selected'
       inputs:
         script: 'echo Service1 selected'
+- stage: Build Service2
+  dependsOn: Pre-Flight
+  displayName: 'BUILD Service 2'   
   - job: Service2
     condition: and(succeeded(), eq('${{ parameters.Service2 }}', 'true'))
     steps:
@@ -45,7 +51,7 @@ stages:
       inputs:
         script: 'echo Service2 selected'
 - stage: DeployToTEST
-  dependsOn: Build
+  dependsOn: Build Service1
   variables:
   - name: Environment
     value: 'single var'
@@ -60,7 +66,7 @@ stages:
         script: 'echo Selcet Service to build example'
 - stage: DeployToTEST2
   displayName: 'DEPLOY'
-  dependsOn: Build
+  dependsOn: Build Service2
   jobs:
   - job: DeployToTESTJob2
     steps:
