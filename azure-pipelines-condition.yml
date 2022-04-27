@@ -18,7 +18,7 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-- stage: Pre-Flight
+- stage: PreFlight
   variables:
   - group: my-variable-group
   displayName: 'Pre-Flight'
@@ -30,8 +30,8 @@ stages:
       displayName: 'Variable from group $(name)'
       inputs:
         script: 'echo Completed Security Scan'
-- stage: Build Service1
-  dependsOn: Pre-Flight
+- stage: BuildService1
+  dependsOn: PreFlight
   displayName: 'BUILD Service 1'
   jobs:
   - job: Service1
@@ -41,8 +41,8 @@ stages:
       displayName: 'Service1 selected'
       inputs:
         script: 'echo Service1 selected'
-- stage: Build Service2
-  dependsOn: Pre-Flight
+- stage: BuildService2
+  dependsOn: PreFlight
   displayName: 'BUILD Service 2' 
   jobs:
   - job: Service2
@@ -53,7 +53,7 @@ stages:
       inputs:
         script: 'echo Service2 selected'
 - stage: DeployToTEST
-  dependsOn: Build Service1
+  dependsOn: BuildService1
   variables:
   - name: Environment
     value: 'single var'
@@ -68,7 +68,7 @@ stages:
         script: 'echo Selcet Service to build example'
 - stage: DeployToTEST2
   displayName: 'DEPLOY'
-  dependsOn: Build Service2
+  dependsOn: BuildService2
   jobs:
   - job: DeployToTESTJob2
     steps:
