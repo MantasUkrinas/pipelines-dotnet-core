@@ -45,6 +45,7 @@ stages:
       inputs:
         script: 'echo Service2 selected'
 - stage: DeployToTEST
+  dependsOn: Build
   variables:
   - name: Environment
     value: 'single var'
@@ -57,3 +58,14 @@ stages:
       displayName: 'Variable from group2 $(name) $(Environment)'
       inputs:
         script: 'echo Selcet Service to build example'
+- stage: DeployToTEST2
+  displayName: 'DEPLOY'
+  dependsOn: Build
+  jobs:
+  - job: DeployToTESTJob2
+    steps:
+    - task: CmdLine@2
+      displayName: 'Variable from group3'
+      inputs:
+        script: 'echo Selcet Service to build example'
+
