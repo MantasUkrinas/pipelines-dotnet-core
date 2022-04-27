@@ -24,7 +24,7 @@ stages:
   displayName: 'Pre-Flight'
   #condition: and(succeeded(), eq('${{ parameters.Service1 }}', 'true'))
   jobs:
-  - job: Do Security Scan
+  - job: SecurityScan
     steps:
     - task: CmdLine@2
       displayName: 'Variable from group $(name)'
