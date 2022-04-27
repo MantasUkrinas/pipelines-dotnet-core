@@ -33,6 +33,7 @@ stages:
 - stage: Build Service1
   dependsOn: Pre-Flight
   displayName: 'BUILD Service 1'
+  jobs:
   - job: Service1
     condition: and(succeeded(), eq('${{ parameters.Service1 }}', 'true'))
     steps:
@@ -42,7 +43,8 @@ stages:
         script: 'echo Service1 selected'
 - stage: Build Service2
   dependsOn: Pre-Flight
-  displayName: 'BUILD Service 2'   
+  displayName: 'BUILD Service 2' 
+  jobs:
   - job: Service2
     condition: and(succeeded(), eq('${{ parameters.Service2 }}', 'true'))
     steps:
