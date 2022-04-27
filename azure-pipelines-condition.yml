@@ -52,7 +52,7 @@ stages:
       displayName: 'Service2 selected'
       inputs:
         script: 'echo Service2 selected'
-- stage: DeployToTEST
+- stage: DeployService1
   dependsOn: BuildService1
   variables:
   - name: Environment
@@ -67,7 +67,7 @@ stages:
       displayName: 'Variable from group2 $(name) $(Environment)'
       inputs:
         script: 'echo Selcet Service to build example'
-- stage: DeployToTEST2
+- stage: DeployService2
   displayName: 'DEPLOY Service 2'
   dependsOn: BuildService2
   condition: and(succeeded(), eq('${{ parameters.Service2 }}', 'true'))
@@ -80,6 +80,9 @@ stages:
         script: 'echo Selcet Service to build example'
 - stage: PostFlight
   displayName: 'PostFlight'
+  dependsOn: 
+  - DeployService1
+  - DeployService2
   jobs:
   - job: DeployToTESTJob2
     steps:
