@@ -30,9 +30,9 @@ stages:
 - stage: BuildService1
   dependsOn: PreFlight
   displayName: 'BUILD Service 1'
+  condition: and(succeeded(), eq('${{ parameters.Service1 }}', 'true'))
   jobs:
   - job: Service1
-    condition: and(succeeded(), eq('${{ parameters.Service1 }}', 'true'))
     steps:
     - task: CmdLine@2
       displayName: 'Building service 1'
@@ -40,10 +40,10 @@ stages:
         script: 'echo Building service 1'
 - stage: BuildService2
   dependsOn: PreFlight
-  displayName: 'BUILD Service 2' 
+  displayName: 'BUILD Service 2'
+  condition: and(succeeded(), eq('${{ parameters.Service2 }}', 'true'))
   jobs:
   - job: Service2
-    condition: and(succeeded(), eq('${{ parameters.Service2 }}', 'true'))
     steps:
     - task: CmdLine@2
       displayName: 'Building service 2'
