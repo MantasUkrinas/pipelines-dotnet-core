@@ -19,15 +19,12 @@ pool:
 
 stages:
 - stage: PreFlight
-  variables:
-  - group: my-variable-group
   displayName: 'Pre-Flight'
-  #condition: and(succeeded(), eq('${{ parameters.Service1 }}', 'true'))
   jobs:
   - job: SecurityScan
     steps:
     - task: CmdLine@2
-      displayName: 'Variable from group $(name)'
+      displayName: 'SecurityScan'
       inputs:
         script: 'echo Completed Security Scan'
 - stage: BuildService1
@@ -38,9 +35,9 @@ stages:
     condition: and(succeeded(), eq('${{ parameters.Service1 }}', 'true'))
     steps:
     - task: CmdLine@2
-      displayName: 'Service1 selected'
+      displayName: 'Building service 1'
       inputs:
-        script: 'echo Service1 selected'
+        script: 'echo Building service 1'
 - stage: BuildService2
   dependsOn: PreFlight
   displayName: 'BUILD Service 2' 
@@ -49,24 +46,20 @@ stages:
     condition: and(succeeded(), eq('${{ parameters.Service2 }}', 'true'))
     steps:
     - task: CmdLine@2
-      displayName: 'Service2 selected'
+      displayName: 'Building service 2'
       inputs:
-        script: 'echo Service2 selected'
+        script: 'echo Building service 2'
 - stage: DeployService1
   dependsOn: BuildService1
-  variables:
-  - name: Environment
-    value: 'single var'
-  - group: my-variable-group2
   displayName: 'DEPLOY Service 1'
   condition: and(succeeded(), eq('${{ parameters.Service1 }}', 'true'))
   jobs:
-  - job: DeployToTESTJob
+  - job: DeployService1
     steps:
     - task: CmdLine@2
-      displayName: 'Variable from group2 $(name) $(Environment)'
+      displayName: 'DeployingService1'
       inputs:
-        script: 'echo Selcet Service to build example'
+        script: 'echo DeployedService1'
 - stage: DeployService2
   displayName: 'DEPLOY Service 2'
   dependsOn: BuildService2
@@ -75,9 +68,9 @@ stages:
   - job: DeployToTESTJob2
     steps:
     - task: CmdLine@2
-      displayName: 'Variable from group3'
+      displayName: 'DeployingService2'
       inputs:
-        script: 'echo Selcet Service to build example'
+        script: 'echo DeployingService2'
 - stage: PostFlight
   displayName: 'PostFlight'
   dependsOn: 
@@ -87,6 +80,6 @@ stages:
   - job: DeployToTESTJob2
     steps:
     - task: CmdLine@2
-      displayName: 'Variable from group3'
+      displayName: 'FinalChecks'
       inputs:
-        script: 'echo Selcet Service to build example'
+        script: 'echo Pipeline completed'
